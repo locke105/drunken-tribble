@@ -8,9 +8,13 @@ import select
 in_sockets = []
 out_sockets = []
 
+def do_work():
+    with open('/home/locke105/.vimrc') as vimrc:
+        vimrc.read()
+
 def handle_client(clientsocket):
     clientsocket.sendall('Hello')
-    time.sleep(1)
+    do_work()
     clientsocket.sendall(' World!')
     clientsocket.close()
     print str(datetime.datetime.now()) + " closed conn"
@@ -20,7 +24,7 @@ serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # async
 serversocket.setblocking(0)
 
-serversocket.bind(('localhost', 8082))
+serversocket.bind(('localhost', 8081))
 
 serversocket.listen(5)
 
